@@ -1,0 +1,6 @@
+[submodule "AI"]
+	path = AI
+	url = https://github.com/JuanPabloMontoya271/IBM-Analytics-AI.git
+[submodule "server"]
+	path = server
+	url = https://github.com/JuanPabloMontoya271/IBM-Analytics-Server.git
