@@ -4,3 +4,6 @@
 [submodule "server"]
 	path = server
 	url = https://github.com/JuanPabloMontoya271/IBM-Analytics-Server.git
+[submodule "IBM-Analytics-Frontend"]
+	path = frontend
+	url = https://github.com/JuanPabloMontoya271/IBM-Analytics-Frontend.git

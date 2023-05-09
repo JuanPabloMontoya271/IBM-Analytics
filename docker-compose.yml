@@ -22,4 +22,27 @@ services:
       - 6379:6379
     command: redis-server --save 60 1 --requirepass MDNcVb924a --loglevel warning
 
+  client:
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: "./server"
+    depends_on:
+      - db
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      MYSQL_HOST_IP: db
+
 
