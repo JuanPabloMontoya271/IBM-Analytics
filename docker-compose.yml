@@ -1,13 +1,15 @@
 version: '3.1' 
 services:
   db:
-    image: postgres:11
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
+    volumes:
+      - ./mysql-dump:/docker-entrypoint-initdb.d
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - '5432:5432'
+        MYSQL_ROOT_PASSWORD: "pw1234"
+    ports: 
+        - 3306:3306
   nginx:
     image: nginx:latest
     restart: always
@@ -43,6 +45,19 @@ services:
       - /app/node_modules
       - ./server:/app
     environment:
-      MYSQL_HOST_IP: db
+      REDIS_USER: default
+      REDIS_PASSWORD: MDNcVb924a
+      HOST: db 
+      MYSQL_USER: root
+      PASSWORD: pw1234 
+      DATABASE: db
+  ai:
+    build:
+      dockerfile: Dockerfile
+      context: "./AI"
+    volumes:
+      - ./AI:/python-docker
+    ports:
+      - 5000:5000
 
 
